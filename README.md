@@ -1,2 +1,2 @@
-# cursoMySQL_e_Python
-Curso de MySQL com Sistema de Cadastro usando Python
+# Curso de MySQL e Python
+Aprendendo MySQL com Sistema de Cadastro usando Python
