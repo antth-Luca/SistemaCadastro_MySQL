@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>536</width>
+    <height>674</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Cadastrando</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">background-color: rgb(129, 129, 129);</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QLineEdit" name="cod">
+    <property name="geometry">
+     <rect>
+      <x>149</x>
+      <y>130</y>
+      <width>272</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border-radius: 15px;
+background-color: rgb(227, 227, 227);
+border-style: outset;
+</string>
+    </property>
+    <property name="placeholderText">
+     <string> Código</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="desc">
+    <property name="geometry">
+     <rect>
+      <x>149</x>
+      <y>180</y>
+      <width>272</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border-radius: 15px;
+background-color: rgb(227, 227, 227);
+border-style: outset;
+</string>
+    </property>
+    <property name="placeholderText">
+     <string> Descrição</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="preco">
+    <property name="geometry">
+     <rect>
+      <x>149</x>
+      <y>230</y>
+      <width>272</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border-radius: 15px;
+background-color: rgb(227, 227, 227);
+border-style: outset;
+</string>
+    </property>
+    <property name="placeholderText">
+     <string> Preço (R$)</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="enviarCad">
+    <property name="geometry">
+     <rect>
+      <x>177</x>
+      <y>500</y>
+      <width>182</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(76, 132, 53);
+color: rgb(255, 255, 255);
+border-radius: 10px;
+border-style: outset;</string>
+    </property>
+    <property name="text">
+     <string>Cadastrar</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="informCat">
+    <property name="geometry">
+     <rect>
+      <x>95</x>
+      <y>290</y>
+      <width>72</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+      <underline>false</underline>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">selection-color: rgb(85, 255, 255);</string>
+    </property>
+    <property name="text">
+     <string>Categoria:</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="imgCod">
+    <property name="geometry">
+     <rect>
+      <x>115</x>
+      <y>130</y>
+      <width>32</width>
+      <height>32</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="pixmap">
+     <pixmap>Cód.Barras.png</pixmap>
+    </property>
+   </widget>
+   <widget class="QLabel" name="imgDesc">
+    <property name="geometry">
+     <rect>
+      <x>115</x>
+      <y>180</y>
+      <width>32</width>
+      <height>32</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="pixmap">
+     <pixmap>Prancheta.png</pixmap>
+    </property>
+   </widget>
+   <widget class="QLabel" name="imgPreco">
+    <property name="geometry">
+     <rect>
+      <x>115</x>
+      <y>230</y>
+      <width>32</width>
+      <height>32</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="pixmap">
+     <pixmap>Cifrão.png</pixmap>
+    </property>
+   </widget>
+   <widget class="QRadioButton" name="radioEletronica">
+    <property name="geometry">
+     <rect>
+      <x>217</x>
+      <y>330</y>
+      <width>102</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>10</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Eletrônica</string>
+    </property>
+   </widget>
+   <widget class="QRadioButton" name="radioFerramentas">
+    <property name="geometry">
+     <rect>
+      <x>217</x>
+      <y>410</y>
+      <width>102</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>10</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Ferramentas</string>
+    </property>
+   </widget>
+   <widget class="QRadioButton" name="radioMecanica">
+    <property name="geometry">
+     <rect>
+      <x>217</x>
+      <y>370</y>
+      <width>102</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>10</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Mecânica</string>
+    </property>
+   </widget>
+   <widget class="QRadioButton" name="radioInformatica">
+    <property name="geometry">
+     <rect>
+      <x>217</x>
+      <y>290</y>
+      <width>102</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>10</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Informática</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="instrucao">
+    <property name="geometry">
+     <rect>
+      <x>23</x>
+      <y>40</y>
+      <width>491</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(175, 216, 157);</string>
+    </property>
+    <property name="text">
+     <string>Preencha os dados abaixo para cadastrar um novo produto:</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="msg">
+    <property name="geometry">
+     <rect>
+      <x>12</x>
+      <y>560</y>
+      <width>512</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(175, 216, 157);</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>536</width>
+     <height>21</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
