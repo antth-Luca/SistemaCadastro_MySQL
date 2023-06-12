@@ -1,13 +1,6 @@
 from PyQt5 import uic, QtWidgets
 import mysql.connector
 
-banco = mysql.connector.connect(
-        host='localhost',
-        user='root',
-        passwd='',
-        database='cadastro_produtos'
-    )
-
 
 def cadastrar():
     # Adicionando a variáveis os valores digitados pelo usuário
@@ -18,15 +11,22 @@ def cadastrar():
     # Adicionando a variável "categoria" pelos RadioButtons
     if janCadastro.radioInformatica.isChecked():
         categoria = 'Informática'
-    elif janCadastro.radioInformatica.isChecked():
+    elif janCadastro.radioEletronica.isChecked():
         categoria = 'Eletrônica'
-    elif janCadastro.radioInformatica.isChecked():
+    elif janCadastro.radioMecanica.isChecked():
         categoria = 'Mecânica'
-    elif janCadastro.radioInformatica.isChecked():
+    elif janCadastro.radioFerramentas.isChecked():
         categoria = 'Ferramentas'
 
-    # Inserindo no banco de dados
+    banco = mysql.connector.connect(
+        host='localhost',
+        user='root',
+        passwd='',
+        database='cadastro_produtos'
+    )
     cursor = banco.cursor()
+
+    # Inserindo no banco de dados
     cursor.execute(f'INSERT INTO produtos VALUES (codigo = "{cod}", descricao = "{desc}", preco = {preco}, categoria = "{categoria}")')
     banco.commit()
     banco.close()
@@ -36,7 +36,7 @@ def cadastrar():
 
 # Preparando para executar
 app = QtWidgets.QApplication([])
-janCadastro = uic.loadUi('formCad.ui')
+janCadastro = uic.loadUi('formularioCad.ui')
 
 # Configurando botões tela de cadastro
 janCadastro.enviarCad.clicked.connect(cadastrar)
