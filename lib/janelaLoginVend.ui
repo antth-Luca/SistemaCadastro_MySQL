@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>487</width>
+    <height>462</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Usuário entrando</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">background-color: rgb(129, 129, 129);</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QLineEdit" name="login">
+    <property name="geometry">
+     <rect>
+      <x>138</x>
+      <y>110</y>
+      <width>241</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border-radius: 15px;
+background-color: rgb(227, 227, 227);
+border-style: outset;
+</string>
+    </property>
+    <property name="placeholderText">
+     <string>Login</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="botao_entrar">
+    <property name="geometry">
+     <rect>
+      <x>278</x>
+      <y>230</y>
+      <width>101</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(76, 132, 53);
+color: rgb(255, 255, 255);
+border-radius: 10px;
+border-style: outset;</string>
+    </property>
+    <property name="text">
+     <string>Entrar</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="botao_cadastre">
+    <property name="geometry">
+     <rect>
+      <x>248</x>
+      <y>380</y>
+      <width>101</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(76, 132, 53);
+color: rgb(255, 255, 255);
+border-radius: 10px;
+border-style: outset;</string>
+    </property>
+    <property name="text">
+     <string>Cadastre-se agora!</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="msg_semCadatro">
+    <property name="geometry">
+     <rect>
+      <x>135</x>
+      <y>380</y>
+      <width>111</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(55, 98, 37);</string>
+    </property>
+    <property name="text">
+     <string>Não está cadastrado?</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="msg_erro">
+    <property name="geometry">
+     <rect>
+      <x>11</x>
+      <y>280</y>
+      <width>461</width>
+      <height>91</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+   <widget class="QLabel" name="imagem_login">
+    <property name="geometry">
+     <rect>
+      <x>104</x>
+      <y>110</y>
+      <width>32</width>
+      <height>32</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="pixmap">
+     <pixmap>Perfil.png</pixmap>
+    </property>
+   </widget>
+   <widget class="QLabel" name="imagem_senha">
+    <property name="geometry">
+     <rect>
+      <x>104</x>
+      <y>175</y>
+      <width>32</width>
+      <height>32</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="pixmap">
+     <pixmap>Chave.png</pixmap>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="senha">
+    <property name="geometry">
+     <rect>
+      <x>138</x>
+      <y>175</y>
+      <width>241</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border-radius: 15px;
+background-color: rgb(227, 227, 227);
+border-style: outset;
+</string>
+    </property>
+    <property name="placeholderText">
+     <string>Senha</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="instrucao">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>50</y>
+      <width>431</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>11</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(175, 216, 157);</string>
+    </property>
+    <property name="text">
+     <string>Preencha os campos abaixo e clique no botão para entrar:</string>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>487</width>
+     <height>21</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

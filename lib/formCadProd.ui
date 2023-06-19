@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Cadastrando</string>
+   <string>Cadastrando produtos</string>
   </property>
   <property name="styleSheet">
    <string notr="true">background-color: rgb(129, 129, 129);</string>
@@ -245,7 +245,7 @@ border-style: outset;</string>
     <property name="geometry">
      <rect>
       <x>23</x>
-      <y>40</y>
+      <y>60</y>
       <width>491</width>
       <height>51</height>
      </rect>
@@ -286,6 +286,44 @@ border-style: outset;</string>
     </property>
     <property name="alignment">
      <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="botao_voltar">
+    <property name="geometry">
+     <rect>
+      <x>8</x>
+      <y>6</y>
+      <width>32</width>
+      <height>32</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(76, 132, 53);
+border-radius: 15px;
+border-style: outset;
+border-width: 0px;</string>
+    </property>
+    <property name="text">
+     <string>&lt;</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="texto_botaoVoltar">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>40</y>
+      <width>31</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Voltar</string>
     </property>
    </widget>
   </widget>

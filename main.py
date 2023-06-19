@@ -1,24 +1,28 @@
 from PyQt5 import uic, QtWidgets
 import mysql.connector
+import mod
 
 
-def conectar():
+def cadastrar():
+    # Zerando aviso ao usuário para caso de um cadastro seguido de outro
+    janCadastro.msg.setText('')
+
+    # Conectando ao banco
     banco = mysql.connector.connect(
         host='localhost',
         user='root',
         passwd='',
-        database='cadastro_produtos'
+        database='curso_mysql'
     )
     cursor = banco.cursor()
 
-
-def cadastrar():
-    # Adicionando a variáveis os valores digitados pelo usuário
-    cod = janCadastro.cod.text()
+    # Adicionando os valores digitados pelo usuário a variáveis para tratamento e uso
+    cod = str(janCadastro.cod.text())
     desc = janCadastro.desc.text()
-    preco = janCadastro.preco.text()
-
-    # Adicionando a variável "categoria" pelos RadioButtons
+    preco = str(janCadastro.preco.text())
+    if ',' in preco:
+        preco = preco.replace(',', '.')
+    # RadioButtons
     if janCadastro.radioInformatica.isChecked():
         categoria = 'Informática'
     elif janCadastro.radioEletronica.isChecked():
@@ -28,61 +32,41 @@ def cadastrar():
     elif janCadastro.radioFerramentas.isChecked():
         categoria = 'Ferramentas'
 
-    conectar()
-
     # Inserindo no banco de dados
-    cursor.execute(f'INSERT INTO produtos VALUES ("{cod}", "{desc}", {preco}, "{categoria}")')
+    cursor.execute(
+        f'INSERT INTO produtos (código, descrição, preço, categoria) VALUES ("{cod}", "{desc}", {preco}, "{categoria}")')
     banco.commit()
+    # Fechando banco
     banco.close()
 
+    # Aviso para o usuário
     janCadastro.msg.setText('Cadastro realizado com sucesso!')
 
-
-try:
-    conectar()
-except:
-    banco = mysql.connector.connect(
-        host='localhost',
-        user='root',
-        passwd='',
-    )
-    cursor = banco.cursor()
-
-    cursor.execute('CREATE DATABASE curso_mysql'
-                   'DEFAULT CHARACTER SET utf8'
-                   'DEFAULT COLLATE utf8_general_ci;')
-
-    cursor.execute('CREATE TABLE produtos ('
-                   'id_prod INT NOT NULL AUTO_INCREMENT,'
-                   'código INT NOT NULL AUTO_INCREMENT,'
-                   'descrição VARCHAR(50) NOT NULL,'
-                   'preço DOUBLE NOT NULL,'
-                   'categoria VARCHAR(10) DEFAULT "Diversos",'
-                   'PRIMARY KEY (id_prod)'
-                   ') DEFAULT CHARSET = utf8;')
-else:
-    try:
-        cursor.execute('SELECT * FROM produtos')
-    except:
-        cursor.execute('CREATE TABLE produtos ('
-                       'id_prod INT NOT NULL AUTO_INCREMENT,'
-                       'codigo INT NOT NULL AUTO_INCREMENT,'
-                       'descricao VARCHAR(50) NOT NULL,'
-                       'preco DOUBLE NOT NULL,'
-                       'categoria VARCHAR(10) DEFAULT "Diversos",'
-                       'PRIMARY KEY (id_prod)'
-                       ') DEFAULT CHARSET = utf8;')
-finally:
-    banco.close()
+    # Limpando campos
+    janCadastro.cod.setText('')
+    janCadastro.desc.setText('')
+    janCadastro.preco.setText('')
 
 
-# Preparando para executar
+# Preparando para a execução
 app = QtWidgets.QApplication([])
-janCadastro = uic.loadUi('formularioCad.ui')
+telaCadastro = uic.loadUi('formCadVendedor.ui')
+primTela = uic.loadUi('janelaLoginVend.ui')
+segTela = uic.loadUi('janelaOpcoes.ui')
+janCadastro = uic.loadUi('formCadProd.ui')
 
-# Configurando botões tela de cadastro
-janCadastro.enviarCad.clicked.connect(cadastrar)
+# Configuração dos elementos da primeira tela
+primTela.senha.setEchoMode(QtWidgets.QLineEdit.Password)
+primTela.botao_entrar.clicked.connect(logar)
+primTela.botao_cadastre.clicked.connect(abrir_tela_cadastro)
+# Configuração dos elementos da segunda tela
+segTela.botao_sair.clicked.connect(deslogar)
+# Configuração dos elementos da tela de cadastro
+telaCadastro.senha.setEchoMode(QtWidgets.QLineEdit.Password)
+telaCadastro.confirma_senha.setEchoMode(QtWidgets.QLineEdit.Password)
+telaCadastro.botao_voltar.clicked.connect(voltar_home)
+telaCadastro.enviar_dados.clicked.connect(cadastrar)
 
-# Executando
-janCadastro.show()
+# Execução
+primTela.show()
 app.exec()
