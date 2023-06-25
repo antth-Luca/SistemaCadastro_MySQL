@@ -58,9 +58,9 @@ border-style: outset;
    <widget class="QLabel" name="msg_for_user">
     <property name="geometry">
      <rect>
-      <x>192</x>
+      <x>186</x>
       <y>320</y>
-      <width>101</width>
+      <width>112</width>
       <height>21</height>
      </rect>
     </property>

@@ -63,7 +63,7 @@ border-style: outset;</string>
      <set>Qt::AlignCenter</set>
     </property>
    </widget>
-   <widget class="QPushButton" name="enviarCad">
+   <widget class="QPushButton" name="verifCads">
     <property name="geometry">
      <rect>
       <x>150</x>
@@ -88,7 +88,7 @@ border-style: outset;</string>
      <string>Verificar produtos cadastrados</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="enviarCad_2">
+   <widget class="QPushButton" name="cadNovoProd">
     <property name="geometry">
      <rect>
       <x>150</x>

@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Usuário entrando</string>
+   <string>Vendedor entrando</string>
   </property>
   <property name="styleSheet">
    <string notr="true">background-color: rgb(129, 129, 129);</string>
