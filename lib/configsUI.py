@@ -72,9 +72,10 @@ def cadastrar_vend():
     login = cadVendedor.login.text()
     senha = cadVendedor.senha.text()
     c_senha = cadVendedor.confirma_senha.text()
+
     # Validando senha
     if senha == c_senha:
-        try:
+        try:  # Tenta conectar no banco e validar se ja existe cadastro com aquele nome de usuário
             banco = mysql.connector.connect(
                 host='localhost',
                 user='root',
@@ -82,25 +83,37 @@ def cadastrar_vend():
                 database='curso_mysql'
             )
             cursor = banco.cursor()
-        except:
-            cadVendedor.msg_for_user.setText('Não foi possível conectar ao banco de dados')
-            cadVendedor.msg_for_user.move(131, 320)
-            cadVendedor.msg_for_user.resize(222, 21)
-        else:
-            try:
-                cursor.execute(f'INSERT INTO vendedores (nome, sobrenome, login, senha) VALUES ("{nome}", "{sobrenome}", "{login}", "{senha}")')
+
+            query = 'SELECT * FROM vendedores WHERE login = %s'
+            values = (login,)
+            cursor.execute(query, values)
+
+            result_query = cursor.fetchone()
+            if result_query is not None:
+                cadVendedor.msg_for_user.setText('Cadastro com esse usuário já existe')
+                cadVendedor.msg_for_user.move(156, 320)
+                cadVendedor.msg_for_user.resize(172, 21)
+            else:  # Se não existe ele faz um novo registro
+                query = 'INSERT INTO vendedores (nome, sobrenome, login, senha) VALUES (%s, %s, %s, %s)'
+                values = (nome, sobrenome, login, senha)
+                cursor.execute(query, values)
                 banco.commit()
-            except:
-                cadVendedor.msg_for_user.setText('Cadastro mal sucedido!')
-                cadVendedor.msg_for_user.move(186, 320)
-                cadVendedor.msg_for_user.resize(112, 21)
-            else:
+
                 cadVendedor.msg_for_user.setText('Cadastro bem sucedido!')
                 cadVendedor.msg_for_user.move(182, 320)
                 cadVendedor.msg_for_user.resize(121, 21)
-            finally:
+
+        except mysql.connector.Error:
+            cadVendedor.msg_for_user.setText('Cadastro mal sucedido!')
+            cadVendedor.msg_for_user.move(186, 320)
+            cadVendedor.msg_for_user.resize(112, 21)
+
+        finally:
+            if banco.is_connected():
+                cursor.close()
                 banco.close()
-    else:     # Falha na confirmação da senha
+
+    else:  # Falha na confirmação da senha
         cadVendedor.msg_for_user.setText('As senhas digitadas estão diferentes. Verifique e tente novamente')
         cadVendedor.msg_for_user.move(81, 320)
         cadVendedor.msg_for_user.resize(322, 21)
@@ -122,6 +135,35 @@ def saindo():
 def ver_produtos_cads():
     opcoes.close()
     consultProdsCadastrados.show()
+
+    try:  # Tenta conectar no banco e validar se ja existe cadastro com aquele nome de usuário
+        banco = mysql.connector.connect(
+            host='localhost',
+            user='root',
+            passwd='',
+            database='curso_mysql'
+        )
+        cursor = banco.cursor()
+
+        query = 'SELECT * FROM produtos'
+        cursor.execute(query)
+        dados = cursor.fetchall()
+
+        consultProdsCadastrados.tableWidget.setRowCount(len(dados))
+        consultProdsCadastrados.tableWidget.setColumnCount(5)
+
+        for c in range(0, len(dados)):
+            for i in range(0, 5):
+                consultProdsCadastrados.tableWidget.setItem(c, i, QtWidgets.QTableWidgetItem(str(dados[c][i])))
+
+    except mysql.connector.Error:
+        print(mysql.connector.Error)
+
+    finally:
+        if banco.is_connected():
+            cursor.close()
+            banco.close()
+
 
 def abrir_cadastrar_prod():
     opcoes.close()
@@ -160,7 +202,8 @@ def cadastrar_prod():
         categoria = 'Ferramentas'
 
     # Inserindo no banco de dados
-    cursor.execute(f'INSERT INTO produtos (código, descrição, preço, categoria) VALUES ("{cod}", "{desc}", {preco}, "{categoria}")')
+    cursor.execute(
+        f'INSERT INTO produtos (código, descrição, preço, categoria) VALUES ("{cod}", "{desc}", {preco}, "{categoria}")')
     banco.commit()
     # Fechando banco
     banco.close()
@@ -185,11 +228,11 @@ def volta_opcoes2():
     consultProdsCadastrados.close()
     opcoes.show()
 
-# Preparação
-app = QtWidgets.QApplication([])
 
 # __________________________________________________________________________
 # Preparação
+app = QtWidgets.QApplication([])
+
 loginVendedor = uic.loadUi('janelaLoginVend.ui')
 cadVendedor = uic.loadUi('formCadVendedor.ui')
 opcoes = uic.loadUi('janelaOpcoes.ui')
