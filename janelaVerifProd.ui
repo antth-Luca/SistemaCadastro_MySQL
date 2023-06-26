@@ -280,7 +280,7 @@ background-color: rgb(209, 184, 0);</string>
      <string>Editar registro</string>
     </property>
    </widget>
-   <widget class="QLineEdit" name="lineEdit">
+   <widget class="QLineEdit" name="barraPesq">
     <property name="geometry">
      <rect>
       <x>9</x>
@@ -297,7 +297,7 @@ color: rgb(78, 78, 78);</string>
      <string>Não encontrou o item desejado? Buscar por:</string>
     </property>
    </widget>
-   <widget class="QLabel" name="label_2">
+   <widget class="QPushButton" name="pesquisar">
     <property name="geometry">
      <rect>
       <x>494</x>
@@ -309,8 +309,15 @@ color: rgb(78, 78, 78);</string>
     <property name="text">
      <string/>
     </property>
-    <property name="pixmap">
-     <pixmap>lupa.png</pixmap>
+    <property name="icon">
+     <iconset>
+      <normaloff>lupa.png</normaloff>lupa.png</iconset>
+    </property>
+    <property name="iconSize">
+     <size>
+      <width>32</width>
+      <height>32</height>
+     </size>
     </property>
    </widget>
   </widget>
