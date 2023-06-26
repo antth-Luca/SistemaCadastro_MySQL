@@ -45,6 +45,12 @@ border-style: outset;
       <height>31</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
     <property name="styleSheet">
      <string notr="true">background-color: rgb(76, 132, 53);
 color: rgb(255, 255, 255);

@@ -1,4 +1,6 @@
 from PyQt5 import uic, QtWidgets
+from PyQt5.QtCore import Qt, QSortFilterProxyModel
+from PyQt5.QtGui import QStandardItem, QStandardItemModel
 import mysql.connector
 
 
@@ -276,6 +278,42 @@ def edicao():
     editProdsCadastrados.show()
 
 
+def pesquisar():
+    busca = consultProdsCadastrados.barraPesq.text()
+
+    if consultProdsCadastrados.radioId.isChecked():
+        criterio = 'id_prod'
+    elif consultProdsCadastrados.radioCod.isChecked():
+        criterio = 'código'
+    elif consultProdsCadastrados.radioDesc.isChecked():
+        criterio = 'descrição'
+    elif consultProdsCadastrados.radioCat.isChecked():
+        criterio = 'categoria'
+
+    banco = mysql.connector.connect(
+        host='localhost',
+        user='root',
+        passwd='',
+        database='curso_mysql'
+    )
+    cursor = banco.cursor()
+
+    query = f'SELECT * FROM produtos WHERE {criterio} = {busca}'
+    cursor.execute(query)
+    result = cursor.fetchone()
+    banco.close()
+
+    consultProdsCadastrados.tableWidget.clearContents()
+    consultProdsCadastrados.tableWidget.setRowCount(0)
+    consultProdsCadastrados.tableWidget.setColumnCount(0)
+
+    consultProdsCadastrados.tableWidget.setRowCount(len(result))
+    consultProdsCadastrados.tableWidget.setColumnCount(5)
+    for l in range(0, len(result)):
+        for c in range(0, 5):
+            consultProdsCadastrados.tableWidget.setItem(l, c, QtWidgets.QTableWidgetItem(str(result[c])))
+
+
 # __________________________________________________________________________
 # Janela para editar produto
 def salvar_edicao():
@@ -293,7 +331,8 @@ def salvar_edicao():
     )
     cursor = banco.cursor()
 
-    cursor.execute(f'UPDATE produtos SET código = "{codigo}", descrição = "{descricao}", preço = "{preco}", categoria = "{categoria}" WHERE id_prod = {id_prod}')
+    cursor.execute(
+        f'UPDATE produtos SET código = "{codigo}", descrição = "{descricao}", preço = "{preco}", categoria = "{categoria}" WHERE id_prod = {id_prod}')
     banco.commit()
 
     banco.close()
@@ -336,8 +375,10 @@ cadProduto.enviarCad.clicked.connect(cadastrar_prod)
 consultProdsCadastrados.botao_voltar.clicked.connect(volta_opcoes2)
 consultProdsCadastrados.excluirRegistro.clicked.connect(excluir_registro)
 consultProdsCadastrados.editarRegistro.clicked.connect(edicao)
+consultProdsCadastrados.pesquisar.clicked.connect(pesquisar)
 # Janela de editar os produtos salvos
 editProdsCadastrados.salvarEdicao.clicked.connect(salvar_edicao)
+
 
 # Execução
 loginVendedor.show()

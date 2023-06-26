@@ -83,9 +83,9 @@ border-width: 0px;</string>
     <property name="geometry">
      <rect>
       <x>9</x>
-      <y>81</y>
+      <y>121</y>
       <width>517</width>
-      <height>511</height>
+      <height>471</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -293,8 +293,14 @@ background-color: rgb(209, 184, 0);</string>
      <string notr="true">background-color: rgb(228, 228, 228);
 color: rgb(78, 78, 78);</string>
     </property>
+    <property name="inputMask">
+     <string/>
+    </property>
     <property name="text">
-     <string>Não encontrou o item desejado? Buscar por:</string>
+     <string/>
+    </property>
+    <property name="placeholderText">
+     <string>Não encontrou o item desejado? Buscar por...</string>
     </property>
    </widget>
    <widget class="QPushButton" name="pesquisar">
@@ -318,6 +324,58 @@ color: rgb(78, 78, 78);</string>
       <width>32</width>
       <height>32</height>
      </size>
+    </property>
+   </widget>
+   <widget class="QRadioButton" name="radioId">
+    <property name="geometry">
+     <rect>
+      <x>61</x>
+      <y>90</y>
+      <width>102</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Identificador</string>
+    </property>
+   </widget>
+   <widget class="QRadioButton" name="radioCod">
+    <property name="geometry">
+     <rect>
+      <x>163</x>
+      <y>90</y>
+      <width>102</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Código</string>
+    </property>
+   </widget>
+   <widget class="QRadioButton" name="radioDesc">
+    <property name="geometry">
+     <rect>
+      <x>260</x>
+      <y>90</y>
+      <width>102</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Nome do produto</string>
+    </property>
+   </widget>
+   <widget class="QRadioButton" name="radioCat">
+    <property name="geometry">
+     <rect>
+      <x>380</x>
+      <y>90</y>
+      <width>102</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Categoria</string>
     </property>
    </widget>
   </widget>
