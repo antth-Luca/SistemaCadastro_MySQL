@@ -20,8 +20,8 @@
    <widget class="QPushButton" name="botao_voltar">
     <property name="geometry">
      <rect>
-      <x>8</x>
-      <y>6</y>
+      <x>9</x>
+      <y>600</y>
       <width>32</width>
       <height>32</height>
      </rect>
@@ -45,8 +45,8 @@ border-width: 0px;</string>
    <widget class="QLabel" name="texto_botaoVoltar">
     <property name="geometry">
      <rect>
-      <x>10</x>
-      <y>40</y>
+      <x>12</x>
+      <y>635</y>
       <width>31</width>
       <height>16</height>
      </rect>
@@ -58,15 +58,15 @@ border-width: 0px;</string>
    <widget class="QLabel" name="label">
     <property name="geometry">
      <rect>
-      <x>202</x>
-      <y>60</y>
-      <width>132</width>
-      <height>16</height>
+      <x>170</x>
+      <y>10</y>
+      <width>181</width>
+      <height>21</height>
      </rect>
     </property>
     <property name="font">
      <font>
-      <pointsize>11</pointsize>
+      <pointsize>15</pointsize>
       <weight>75</weight>
       <bold>true</bold>
       <underline>true</underline>
@@ -83,9 +83,9 @@ border-width: 0px;</string>
     <property name="geometry">
      <rect>
       <x>9</x>
-      <y>101</y>
+      <y>81</y>
       <width>517</width>
-      <height>491</height>
+      <height>511</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -280,16 +280,39 @@ background-color: rgb(209, 184, 0);</string>
      <string>Editar registro</string>
     </property>
    </widget>
-  </widget>
-  <widget class="QMenuBar" name="menubar">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>536</width>
-     <height>21</height>
-    </rect>
-   </property>
+   <widget class="QLineEdit" name="lineEdit">
+    <property name="geometry">
+     <rect>
+      <x>9</x>
+      <y>40</y>
+      <width>485</width>
+      <height>32</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(228, 228, 228);
+color: rgb(78, 78, 78);</string>
+    </property>
+    <property name="text">
+     <string>Não encontrou o item desejado? Buscar por:</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_2">
+    <property name="geometry">
+     <rect>
+      <x>494</x>
+      <y>40</y>
+      <width>32</width>
+      <height>32</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="pixmap">
+     <pixmap>lupa.png</pixmap>
+    </property>
+   </widget>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
