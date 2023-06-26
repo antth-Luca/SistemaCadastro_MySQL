@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>536</width>
+    <height>270</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">background-color: rgb(129, 129, 129);</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QLabel" name="Instrucao">
+    <property name="geometry">
+     <rect>
+      <x>190</x>
+      <y>30</y>
+      <width>141</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>11</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+      <underline>true</underline>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(175, 216, 157);</string>
+    </property>
+    <property name="text">
+     <string>Edite esse produto</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="salvarEdicao">
+    <property name="geometry">
+     <rect>
+      <x>210</x>
+      <y>190</y>
+      <width>101</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <weight>50</weight>
+      <bold>false</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(76, 132, 53);
+color: rgb(255, 255, 255);
+border-radius: 15px;
+border-style: outset;
+border-width: 0px;</string>
+    </property>
+    <property name="text">
+     <string>Salvar</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="lineId">
+    <property name="geometry">
+     <rect>
+      <x>18</x>
+      <y>120</y>
+      <width>50</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(228, 228, 228);</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="lineCod">
+    <property name="geometry">
+     <rect>
+      <x>68</x>
+      <y>120</y>
+      <width>82</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(228, 228, 228);</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="linePreco">
+    <property name="geometry">
+     <rect>
+      <x>322</x>
+      <y>120</y>
+      <width>82</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(228, 228, 228);</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="lineCategoria">
+    <property name="geometry">
+     <rect>
+      <x>404</x>
+      <y>120</y>
+      <width>114</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(228, 228, 228);</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="lineNome">
+    <property name="geometry">
+     <rect>
+      <x>150</x>
+      <y>120</y>
+      <width>172</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(228, 228, 228);</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="guiaPreencher">
+    <property name="geometry">
+     <rect>
+      <x>18</x>
+      <y>100</y>
+      <width>500</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(255, 255, 255);</string>
+    </property>
+    <property name="text">
+     <string>  ID             Código               Nome produto                              Preço(R$)         Categoria</string>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>536</width>
+     <height>21</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

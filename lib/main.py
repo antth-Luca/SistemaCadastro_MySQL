@@ -136,33 +136,7 @@ def ver_produtos_cads():
     opcoes.close()
     consultProdsCadastrados.show()
 
-    try:  # Tenta conectar no banco e validar se ja existe cadastro com aquele nome de usuário
-        banco = mysql.connector.connect(
-            host='localhost',
-            user='root',
-            passwd='',
-            database='curso_mysql'
-        )
-        cursor = banco.cursor()
-
-        query = 'SELECT * FROM produtos'
-        cursor.execute(query)
-        dados = cursor.fetchall()
-
-        consultProdsCadastrados.tableWidget.setRowCount(len(dados))
-        consultProdsCadastrados.tableWidget.setColumnCount(5)
-
-        for c in range(0, len(dados)):
-            for i in range(0, 5):
-                consultProdsCadastrados.tableWidget.setItem(c, i, QtWidgets.QTableWidgetItem(str(dados[c][i])))
-
-    except mysql.connector.Error:
-        print(mysql.connector.Error)
-
-    finally:
-        if banco.is_connected():
-            cursor.close()
-            banco.close()
+    atualizar_lista()
 
 
 def abrir_cadastrar_prod():
@@ -229,6 +203,115 @@ def volta_opcoes2():
     opcoes.show()
 
 
+def excluir_registro():
+    banco = mysql.connector.connect(
+        host='localhost',
+        user='root',
+        passwd='',
+        database='curso_mysql'
+    )
+    cursor = banco.cursor()
+
+    selectNaInterface = consultProdsCadastrados.tableWidget.currentRow()
+
+    cursor.execute('SELECT id_prod FROM produtos')
+    idsLidos = cursor.fetchall()
+    selectId = str(idsLidos[selectNaInterface][0])
+
+    cursor.execute(f'DELETE FROM produtos WHERE id_prod = {selectId}')
+
+    banco.close()
+
+    atualizar_lista()
+
+
+def atualizar_lista():
+    try:  # Tenta conectar no banco e validar se ja existe cadastro com aquele nome de usuário
+        banco = mysql.connector.connect(
+            host='localhost',
+            user='root',
+            passwd='',
+            database='curso_mysql'
+        )
+        cursor = banco.cursor()
+
+        query = 'SELECT * FROM produtos'
+        cursor.execute(query)
+        dados = cursor.fetchall()
+
+        consultProdsCadastrados.tableWidget.setRowCount(len(dados))
+        consultProdsCadastrados.tableWidget.setColumnCount(5)
+
+        for c in range(0, len(dados)):
+            for i in range(0, 5):
+                consultProdsCadastrados.tableWidget.setItem(c, i, QtWidgets.QTableWidgetItem(str(dados[c][i])))
+
+    except mysql.connector.Error:
+        print(mysql.connector.Error)
+
+    finally:
+        if banco.is_connected():
+            cursor.close()
+            banco.close()
+
+
+def edicao():
+    selectNaInterface = consultProdsCadastrados.tableWidget.currentRow()
+
+    banco = mysql.connector.connect(
+        host='localhost',
+        user='root',
+        passwd='',
+        database='curso_mysql'
+    )
+    cursor = banco.cursor()
+
+    cursor.execute('SELECT id_prod FROM produtos')
+    idsLidos = cursor.fetchall()
+    selectId = str(idsLidos[selectNaInterface][0])
+
+    cursor.execute(f'SELECT * FROM produtos WHERE id_prod = {selectId}')
+    dados = cursor.fetchall()
+
+    print(dados)
+
+    banco.close()
+
+    editProdsCadastrados.show()
+
+    editProdsCadastrados.lineId.setText(dados[0][0])
+    editProdsCadastrados.lineCod.setText(dados[0][1])
+    editProdsCadastrados.lineNome.setText(dados[0][2])
+    editProdsCadastrados.linePreco.setText(dados[0][3])
+    editProdsCadastrados.lineCategoria.setText(dados[0][4])
+
+
+# __________________________________________________________________________
+# Janela para editar produto
+def salvar_edicao():
+    novosDados = [editProdsCadastrados.lineId.text(), editProdsCadastrados.lineCod.text(),
+                  editProdsCadastrados.lineNome.text(), editProdsCadastrados.linePreco.text(),
+                  editProdsCadastrados.lineCategoria.text()]
+    novosDados = [str(item) for item in novosDados]
+
+    banco = mysql.connector.connect(
+        host='localhost',
+        user='root',
+        passwd='',
+        database='curso_mysql'
+    )
+    cursor = banco.cursor()
+
+    cursor.execute(f'UPDATE produtos SET id_prod = {novosDados[0]}, código = {novosDados[1]}, '
+                   f'descrição = {novosDados[2]}, preço = {novosDados[3]}, categoria = {novosDados[4]} '
+                   f'WHERE id_prod = {novosDados[0]}')
+    cursor.commit()
+
+    banco.close()
+
+    atualizar_lista()
+
+
 # __________________________________________________________________________
 # Preparação
 app = QtWidgets.QApplication([])
@@ -238,6 +321,7 @@ cadVendedor = uic.loadUi('formCadVendedor.ui')
 opcoes = uic.loadUi('janelaOpcoes.ui')
 cadProduto = uic.loadUi('formCadProd.ui')
 consultProdsCadastrados = uic.loadUi('janelaVerifProd.ui')
+editProdsCadastrados = uic.loadUi('editProduto.ui')
 
 # __________________________________________________________________________
 # Configurando botões
@@ -259,6 +343,10 @@ cadProduto.botao_voltar.clicked.connect(volta_opcoes1)
 cadProduto.enviarCad.clicked.connect(cadastrar_prod)
 # Janela de ver os produtos cadastrados
 consultProdsCadastrados.botao_voltar.clicked.connect(volta_opcoes2)
+consultProdsCadastrados.excluirRegistro.clicked.connect(excluir_registro)
+consultProdsCadastrados.editarRegistro.clicked.connect(edicao)
+# Janela de editar os produtos salvos
+editProdsCadastrados.salvarEdicao.clicked.connect(salvar_edicao)
 
 # Execução
 loginVendedor.show()

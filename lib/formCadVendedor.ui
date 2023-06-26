@@ -182,7 +182,7 @@ border-style: outset;
      <string/>
     </property>
     <property name="pixmap">
-     <pixmap>../Parte 1/Perfil.png</pixmap>
+     <pixmap>Perfil.png</pixmap>
     </property>
    </widget>
    <widget class="QLabel" name="imagem_senha">
@@ -198,7 +198,7 @@ border-style: outset;
      <string/>
     </property>
     <property name="pixmap">
-     <pixmap>../Parte 1/Chave.png</pixmap>
+     <pixmap>Chave.png</pixmap>
     </property>
    </widget>
    <widget class="QLineEdit" name="senha">
