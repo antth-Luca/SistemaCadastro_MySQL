@@ -110,7 +110,6 @@ def cadastrar_vend():
 
         finally:
             if banco.is_connected():
-                cursor.close()
                 banco.close()
 
     else:  # Falha na confirmação da senha
@@ -226,33 +225,26 @@ def excluir_registro():
 
 
 def atualizar_lista():
-    try:  # Tenta conectar no banco e validar se ja existe cadastro com aquele nome de usuário
-        banco = mysql.connector.connect(
-            host='localhost',
-            user='root',
-            passwd='',
-            database='curso_mysql'
-        )
-        cursor = banco.cursor()
+    banco = mysql.connector.connect(
+        host='localhost',
+        user='root',
+        passwd='',
+        database='curso_mysql'
+    )
+    cursor = banco.cursor()
 
-        query = 'SELECT * FROM produtos'
-        cursor.execute(query)
-        dados = cursor.fetchall()
+    query = 'SELECT * FROM produtos'
+    cursor.execute(query)
+    dados = cursor.fetchall()
 
-        consultProdsCadastrados.tableWidget.setRowCount(len(dados))
-        consultProdsCadastrados.tableWidget.setColumnCount(5)
+    consultProdsCadastrados.tableWidget.setRowCount(len(dados))
+    consultProdsCadastrados.tableWidget.setColumnCount(5)
 
-        for c in range(0, len(dados)):
-            for i in range(0, 5):
-                consultProdsCadastrados.tableWidget.setItem(c, i, QtWidgets.QTableWidgetItem(str(dados[c][i])))
+    for c in range(0, len(dados)):
+        for i in range(0, 5):
+            consultProdsCadastrados.tableWidget.setItem(c, i, QtWidgets.QTableWidgetItem(str(dados[c][i])))
 
-    except mysql.connector.Error:
-        print(mysql.connector.Error)
-
-    finally:
-        if banco.is_connected():
-            cursor.close()
-            banco.close()
+    banco.close()
 
 
 def edicao():
@@ -273,26 +265,25 @@ def edicao():
     cursor.execute(f'SELECT * FROM produtos WHERE id_prod = {selectId}')
     dados = cursor.fetchall()
 
-    print(dados)
-
     banco.close()
 
-    editProdsCadastrados.show()
+    editProdsCadastrados.lineId.setText(str(dados[0][0]))
+    editProdsCadastrados.lineCod.setText(str(dados[0][1]))
+    editProdsCadastrados.lineNome.setText(str(dados[0][2]))
+    editProdsCadastrados.linePreco.setText(str(dados[0][3]))
+    editProdsCadastrados.lineCategoria.setText(str(dados[0][4]))
 
-    editProdsCadastrados.lineId.setText(dados[0][0])
-    editProdsCadastrados.lineCod.setText(dados[0][1])
-    editProdsCadastrados.lineNome.setText(dados[0][2])
-    editProdsCadastrados.linePreco.setText(dados[0][3])
-    editProdsCadastrados.lineCategoria.setText(dados[0][4])
+    editProdsCadastrados.show()
 
 
 # __________________________________________________________________________
 # Janela para editar produto
 def salvar_edicao():
-    novosDados = [editProdsCadastrados.lineId.text(), editProdsCadastrados.lineCod.text(),
-                  editProdsCadastrados.lineNome.text(), editProdsCadastrados.linePreco.text(),
-                  editProdsCadastrados.lineCategoria.text()]
-    novosDados = [str(item) for item in novosDados]
+    id_prod = editProdsCadastrados.lineId.text()
+    codigo = editProdsCadastrados.lineCod.text()
+    descricao = editProdsCadastrados.lineNome.text()
+    preco = editProdsCadastrados.linePreco.text()
+    categoria = editProdsCadastrados.lineCategoria.text()
 
     banco = mysql.connector.connect(
         host='localhost',
@@ -302,14 +293,14 @@ def salvar_edicao():
     )
     cursor = banco.cursor()
 
-    cursor.execute(f'UPDATE produtos SET id_prod = {novosDados[0]}, código = {novosDados[1]}, '
-                   f'descrição = {novosDados[2]}, preço = {novosDados[3]}, categoria = {novosDados[4]} '
-                   f'WHERE id_prod = {novosDados[0]}')
-    cursor.commit()
+    cursor.execute(f'UPDATE produtos SET código = "{codigo}", descrição = "{descricao}", preço = "{preco}", categoria = "{categoria}" WHERE id_prod = {id_prod}')
+    banco.commit()
 
     banco.close()
 
     atualizar_lista()
+
+    editProdsCadastrados.close()
 
 
 # __________________________________________________________________________
