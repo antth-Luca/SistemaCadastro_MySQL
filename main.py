@@ -280,48 +280,68 @@ def edicao():
 
 
 def pesquisar():
+    criterio = '_:--.=='
     busca = consultProdsCadastrados.barraPesq.text()
 
-    if consultProdsCadastrados.radioId.isChecked():
-        criterio = 'id_prod'
-    elif consultProdsCadastrados.radioCod.isChecked():
-        criterio = 'código'
-    elif consultProdsCadastrados.radioDesc.isChecked():
-        criterio = 'descrição'
-    elif consultProdsCadastrados.radioCat.isChecked():
-        criterio = 'categoria'
-
-    banco = mysql.connector.connect(
-        host='localhost',
-        user='root',
-        passwd='',
-        database='curso_mysql'
-    )
-    cursor = banco.cursor()
-
-    query = f'SELECT * FROM produtos WHERE {criterio} = {busca}'
-    cursor.execute(query)
-    result = cursor.fetchall()
-    banco.close()
-
-    if len(result) != 0:
-        consultProdsCadastrados.tableWidget.clear()
-        consultProdsCadastrados.tableWidget.setRowCount(len(result))
-        consultProdsCadastrados.tableWidget.setColumnCount(5)
-        consultProdsCadastrados.tableWidget.setColumnWidth(0, 100)
-        consultProdsCadastrados.tableWidget.setHorizontalHeaderLabels(['Identificador', 'Código', 'Nome', 'Preço (R$)', 'Categoria'])
-
-        for l in range(0, len(result)):
-            for c in range(0, 5):
-                consultProdsCadastrados.tableWidget.setItem(l, c, QtWidgets.QTableWidgetItem(str(result[l][c])))
-    else:
+    if busca == '':
         consultProdsCadastrados.tableWidget.clear()
         consultProdsCadastrados.tableWidget.setRowCount(1)
         consultProdsCadastrados.tableWidget.setColumnCount(1)
         consultProdsCadastrados.tableWidget.setColumnWidth(0, 517)
         consultProdsCadastrados.tableWidget.setHorizontalHeaderLabels([' '])
 
-        consultProdsCadastrados.tableWidget.setItem(0, 0, QtWidgets.QTableWidgetItem('Nenhum resultado encontrado para esta busca.'))
+        consultProdsCadastrados.tableWidget.setItem(0, 0, QtWidgets.QTableWidgetItem('Digite algo para realizar a busca.'))
+    else:
+        if consultProdsCadastrados.radioId.isChecked():
+            criterio = 'id_prod'
+        elif consultProdsCadastrados.radioCod.isChecked():
+            criterio = 'código'
+        elif consultProdsCadastrados.radioDesc.isChecked():
+            criterio = 'descrição'
+        elif consultProdsCadastrados.radioCat.isChecked():
+            criterio = 'categoria'
+
+        if criterio == '_:--.==':
+            consultProdsCadastrados.tableWidget.clear()
+            consultProdsCadastrados.tableWidget.setRowCount(1)
+            consultProdsCadastrados.tableWidget.setColumnCount(1)
+            consultProdsCadastrados.tableWidget.setColumnWidth(0, 517)
+            consultProdsCadastrados.tableWidget.setHorizontalHeaderLabels([' '])
+
+            consultProdsCadastrados.tableWidget.setItem(0, 0, QtWidgets.QTableWidgetItem('Selecione um filtro de busca para realizá-la.'))
+
+        else:
+            banco = mysql.connector.connect(
+                host='localhost',
+                user='root',
+                passwd='',
+                database='curso_mysql'
+            )
+            cursor = banco.cursor()
+
+            query = f'SELECT * FROM produtos WHERE {criterio} = {busca}'
+            cursor.execute(query)
+            result = cursor.fetchall()
+            banco.close()
+
+            if len(result) != 0:
+                consultProdsCadastrados.tableWidget.clear()
+                consultProdsCadastrados.tableWidget.setRowCount(len(result))
+                consultProdsCadastrados.tableWidget.setColumnCount(5)
+                consultProdsCadastrados.tableWidget.setColumnWidth(0, 100)
+                consultProdsCadastrados.tableWidget.setHorizontalHeaderLabels(['Identificador', 'Código', 'Nome', 'Preço (R$)', 'Categoria'])
+
+                for l in range(0, len(result)):
+                    for c in range(0, 5):
+                        consultProdsCadastrados.tableWidget.setItem(l, c, QtWidgets.QTableWidgetItem(str(result[l][c])))
+            else:
+                consultProdsCadastrados.tableWidget.clear()
+                consultProdsCadastrados.tableWidget.setRowCount(1)
+                consultProdsCadastrados.tableWidget.setColumnCount(1)
+                consultProdsCadastrados.tableWidget.setColumnWidth(0, 517)
+                consultProdsCadastrados.tableWidget.setHorizontalHeaderLabels([' '])
+
+                consultProdsCadastrados.tableWidget.setItem(0, 0, QtWidgets.QTableWidgetItem('Nenhum resultado encontrado para esta busca.'))
 
 
 # __________________________________________________________________________
