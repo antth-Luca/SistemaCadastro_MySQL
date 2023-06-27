@@ -1,6 +1,7 @@
 from PyQt5 import uic, QtWidgets
 from PyQt5.QtCore import Qt, QSortFilterProxyModel
 from PyQt5.QtGui import QStandardItem, QStandardItemModel
+from PyQt5.QtGui import QFont
 import mysql.connector
 
 
@@ -300,18 +301,27 @@ def pesquisar():
 
     query = f'SELECT * FROM produtos WHERE {criterio} = {busca}'
     cursor.execute(query)
-    result = cursor.fetchone()
+    result = cursor.fetchall()
     banco.close()
 
-    consultProdsCadastrados.tableWidget.clearContents()
-    consultProdsCadastrados.tableWidget.setRowCount(0)
-    consultProdsCadastrados.tableWidget.setColumnCount(0)
+    if len(result) != 0:
+        consultProdsCadastrados.tableWidget.clear()
+        consultProdsCadastrados.tableWidget.setRowCount(len(result))
+        consultProdsCadastrados.tableWidget.setColumnCount(5)
+        consultProdsCadastrados.tableWidget.setColumnWidth(0, 100)
+        consultProdsCadastrados.tableWidget.setHorizontalHeaderLabels(['Identificador', 'Código', 'Nome', 'Preço (R$)', 'Categoria'])
 
-    consultProdsCadastrados.tableWidget.setRowCount(len(result))
-    consultProdsCadastrados.tableWidget.setColumnCount(5)
-    for l in range(0, len(result)):
-        for c in range(0, 5):
-            consultProdsCadastrados.tableWidget.setItem(l, c, QtWidgets.QTableWidgetItem(str(result[c])))
+        for l in range(0, len(result)):
+            for c in range(0, 5):
+                consultProdsCadastrados.tableWidget.setItem(l, c, QtWidgets.QTableWidgetItem(str(result[l][c])))
+    else:
+        consultProdsCadastrados.tableWidget.clear()
+        consultProdsCadastrados.tableWidget.setRowCount(1)
+        consultProdsCadastrados.tableWidget.setColumnCount(1)
+        consultProdsCadastrados.tableWidget.setColumnWidth(0, 517)
+        consultProdsCadastrados.tableWidget.setHorizontalHeaderLabels([' '])
+
+        consultProdsCadastrados.tableWidget.setItem(0, 0, QtWidgets.QTableWidgetItem('Nenhum resultado encontrado para esta busca.'))
 
 
 # __________________________________________________________________________
